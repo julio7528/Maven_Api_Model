@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  cadastro-carros-app:
+    build: .
+    container_name: cadastro-carros-api
+    ports:
+      - "8087:8087"
+    environment:
+      # Se precisar passar variáveis de ambiente para a aplicação Spring Boot,
+      # descomente e ajuste as linhas abaixo.
+      # Exemplo:
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mydatabase
+      # - SPRING_DATASOURCE_USERNAME=user
+      # - SPRING_DATASOURCE_PASSWORD=password
+      - SERVER_PORT=8087 # Garante que a porta interna seja a mesma exposta
+
+# Se você tivesse um banco de dados externo (ex: PostgreSQL) em outro container,
+# você o definiria aqui e poderia usar 'depends_on' no serviço 'cadastro-carros-app'.
+# Exemplo:
+# services:
+#   db:
+#     image: postgres:14
+#     container_name: postgres_db
+#     environment:
+#       POSTGRES_DB: mydatabase
+#       POSTGRES_USER: user
+#       POSTGRES_PASSWORD: password
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     ports:
+#       - "5432:5432"
+#
+#   cadastro-carros-app:
+#     build: .
+#     container_name: cadastro-carros-api
+#     ports:
+#       - "8087:8087"
+#     depends_on:
+#       - db
+#     environment:
+#       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mydatabase
+#       - SPRING_DATASOURCE_USERNAME=user
+#       - SPRING_DATASOURCE_PASSWORD=password
+#       - SERVER_PORT=8087
+#
+# volumes:
+#   postgres_data:
